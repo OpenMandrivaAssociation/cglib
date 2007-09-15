@@ -44,7 +44,7 @@
 Summary:        Code Generation Library
 Name:           cglib
 Version:        2.1.3
-Release:        %mkrel 2.1.1
+Release:        %mkrel 2.1.2
 Epoch:          0
 License:        Apache License
 URL:            http://cglib.sourceforge.net/
