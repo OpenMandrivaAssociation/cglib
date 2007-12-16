@@ -44,7 +44,7 @@
 Summary:        Code Generation Library
 Name:           cglib
 Version:        2.1.3
-Release:        %mkrel 2.1.2
+Release:        %mkrel 2.1.3
 Epoch:          0
 License:        Apache License
 URL:            http://cglib.sourceforge.net/
@@ -61,7 +61,7 @@ Patch1:         cglib-ExamplePreProcessor.patch
 # Testcase "testRegisterCallbacks" also fails.
 # java-1.4.2-sun-1.4.2.10-1jpp and # java-1.4.2-ibm-1.4.2.3-1jpp don't
 Patch2:         cglib-2.1.3-TestEnhancer.patch
-BuildRequires:  jpackage-utils >= 0:1.6
+BuildRequires:  java-rpmbuild >= 0:1.6
 BuildRequires:  ant >= 0:1.6
 BuildRequires:  ant-junit >= 0:1.6
 BuildRequires:  jarjar
