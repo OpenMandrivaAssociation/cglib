@@ -83,7 +83,6 @@ Requires(postun): java-gcj-compat >= 0:1.0.31
 %else
 BuildArch:      noarch
 %endif
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 cglib is a powerful, high performance and quality 
