@@ -35,7 +35,8 @@
 # A cglib without net.sf.cglib.transform.hook.* is useful to 
 # build jmock which is an indirect dependency of cglib itself (through 
 # aspectwerkz).
-%bcond_with hook
+%define _with_hook 1
+%bcond_with hook 
 
 %define gcj_support 1
 %define section free
@@ -44,7 +45,7 @@
 Summary:        Code Generation Library
 Name:           cglib
 Version:        2.1.3
-Release:        %mkrel 2.1.3
+Release:        %mkrel 2.1.4
 Epoch:          0
 License:        Apache License
 URL:            http://cglib.sourceforge.net/
@@ -189,7 +190,7 @@ cp -p dist/%{name}-nodep-%{uscver}.jar \
 mkdir -p $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 rmdir docs/api
 cp -pr docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 #demo
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
@@ -250,7 +251,7 @@ fi
 %files javadoc
 %defattr(0644,root,root,0755)
 %{_javadocdir}/%{name}-%{version}
-%ghost %{_javadocdir}/%{name}
+%{_javadocdir}/%{name}
 
 %files demo
 %defattr(0644,root,root,0755)
