@@ -45,7 +45,7 @@
 Summary:        Code Generation Library
 Name:           cglib
 Version:        2.1.3
-Release:        %mkrel 2.1.4
+Release:        %mkrel 2.1.5
 Epoch:          0
 License:        Apache License
 URL:            http://cglib.sourceforge.net/
@@ -79,8 +79,6 @@ Requires:  aspectwerkz >= 0:1.0
 Provides:        %{name}-nohook = %{epoch}:%{version}-%{release}
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel >= 0:1.0.31
-Requires(post): java-gcj-compat >= 0:1.0.31
-Requires(postun): java-gcj-compat >= 0:1.0.31
 %else
 BuildArch:      noarch
 %endif
