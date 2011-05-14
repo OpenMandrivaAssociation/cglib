@@ -1,10 +1,10 @@
 %define _mavenpomdir /usr/share/maven2/poms
 Name:           cglib
 Version:        2.2
-Release:        1
+Release:        3
 Summary:        Code Generation Library for Java
 License:        ASL 2.0
-Group:          Development/Tools
+Group:          Development/Java
 Url:            http://cglib.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.jar
 Source1:        http://mirrors.ibiblio.org/pub/mirrors/maven2/%{name}/%{name}/%{version}/%{name}-%{version}.pom
