@@ -6,7 +6,7 @@ Summary:        Code Generation Library for Java
 License:        ASL 2.0
 Group:          Development/Java
 Url:            http://cglib.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.jar
+Source0:        http://downloads.sourceforge.net/project/%{name}/%{name}2/%{version}/%{name}-src-%{version}.jar
 Source1:        http://mirrors.ibiblio.org/pub/mirrors/maven2/%{name}/%{name}/%{version}/%{name}-%{version}.pom
 # Remove the repackaging step that includes other jars into the final thing
 Patch0:         %{name}-build_xml.patch
@@ -32,7 +32,7 @@ at runtime.
 
 %package javadoc
 Summary:        Javadoc for %{name}
-Group:          Documentation
+Group:          Development/Java
 %description javadoc
 Documentation for the cglib code generation library.
 
