@@ -3,7 +3,7 @@
 Summary:        Code Generation Library for Java
 Name:           cglib
 Version:        2.2
-Release:        5
+Release:        6
 License:        ASL 2.0
 Group:          Development/Java
 Url:            http://cglib.sourceforge.net/
