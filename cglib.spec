@@ -1,18 +1,16 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:           cglib
-Version:        2.2
-Release:        17.1%{?dist}
+Version:        3.1
+Release:        5%{?dist}
 Summary:        Code Generation Library for Java
 License:        ASL 2.0 and BSD
-
+Group:          Development/Tools
 Url:            http://cglib.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.jar
 Source1:        http://mirrors.ibiblio.org/pub/mirrors/maven2/%{name}/%{name}/%{version}/%{name}-%{version}.pom
 Source2:        bnd.properties
-# Remove the repackaging step that includes other jars into the final thing
-Patch0:         %{name}-build_xml.patch
 
-Requires: java >= 0:1.6.0
+Requires: java-headless >= 0:1.6.0
 Requires: objectweb-asm
 
 BuildRequires:  ant
@@ -30,17 +28,21 @@ at runtime.
 
 %package javadoc
 Summary:        Javadoc for %{name}
-
+Group:          Documentation
 %description javadoc
 Documentation for the cglib code generation library.
 
 %prep
 %setup -q -c %{name}-%{version}
+cp -p %{SOURCE1} pom.xml
 rm lib/*.jar
-%patch0 -p1
+# Remove the repackaging step that includes other jars into the final thing
+sed -i "/<taskdef name=.jarjar/,/<.jarjar>/d" build.xml
+
+%pom_xpath_remove "pom:dependency[pom:artifactId = 'asm-util']/pom:optional"
 
 %build
-export CLASSPATH=`build-classpath objectweb-asm`
+export OPT_JAR_LIST=objectweb-asm
 ant jar javadoc
 # Convert to OSGi bundle
 pushd dist
@@ -53,26 +55,41 @@ install -d -m 755 %{buildroot}%{_javadir}
 install -d -m 755 %{buildroot}%{_mavenpomdir}
 install -d -m 755 %{buildroot}%{_javadocdir}/%{name}
 mkdir -p %{buildroot}%{_mavenpomdir}
-cp %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
 # yes, this is really *.bar - aqute bnd created it
 install -p -m 644 dist/%{name}-%{version}.bar %{buildroot}%{_javadir}/%{name}.jar
-install -p -m 644 %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
-%add_maven_depmap -a net.sf.cglib:cglib
-%add_maven_depmap -a cglib:cglib-full
+install -p -m 644 pom.xml %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
+%add_maven_depmap -a net.sf.cglib:cglib,cglib:cglib-full,cglib:cglib-nodep,org.sonatype.sisu.inject:cglib
 
 cp -rp docs/* %{buildroot}%{_javadocdir}/%{name}
 
-%files
+%files -f .mfiles
 %doc LICENSE NOTICE
-%{_javadir}/%{name}.jar
-%{_mavenpomdir}/JPP-%{name}.pom
-%{_mavendepmapfragdir}/%{name}
 
 %files javadoc
 %doc LICENSE NOTICE
 %{_javadocdir}/%{name}
 
 %changelog
+* Mon Oct 20 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 3.1-5
+- Add alias for cglib:cglib-nodep
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Wed May 21 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 3.1-3
+- Use .mfiles generated during build
+
+* Tue Mar 04 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 3.1-2
+- Use Requires: java-headless rebuild (#1067528)
+
+* Mon Jan 13 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 3.1-1
+- Update to upstream version 3.1
+- Remove patch for upstream bug 44 (fixed upstream)
+
+* Mon Nov 11 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 3.0-1
+- Update to upstream version 3.0
+- Add alias for org.sonatype.sisu.inject:cglib
+
 * Mon Aug 05 2013 Severin Gehwolf <sgehwolf@redhat.com> 2.2-17
 - Remove old call to %add_to_maven_depmap macro.
 - Fixes RHBZ#992051.
@@ -130,3 +147,4 @@ cp -rp docs/* %{buildroot}%{_javadocdir}/%{name}
 
 * Tue Nov  4 2008 Mary Ellen Foster <mefoster at gmail.com> - 2.2-1
 - Initial package (based on previous JPP version)
+

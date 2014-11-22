@@ -1,2 +1,4 @@
 sources:
+  cglib-3.1.pom: 9d5ead8460e8bfc2c0e399f0638aeaff1bbadc90
   cglib-src-2.2.jar: e608c738fe37f78101cb84406f2afae31d45bc6f
+  cglib-src-3.1.jar: e651cbd93cb1c2155afdea6675c50e567f7ce91e
