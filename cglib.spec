@@ -5,7 +5,7 @@ Release:        5%{?dist}
 Summary:        Code Generation Library for Java
 License:        ASL 2.0 and BSD
 Group:          Development/Tools
-Url:            http://cglib.sourceforge.net/
+Url:            https://cglib.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.jar
 Source1:        http://mirrors.ibiblio.org/pub/mirrors/maven2/%{name}/%{name}/%{version}/%{name}-%{version}.pom
 Source2:        bnd.properties
